@@ -7,12 +7,13 @@ import classnames from 'classnames'
 export default function HomeLayout({ children }) {
   const pathname = usePathname()
  
-  const pptClassNames = classnames('p-4 h-full hover:bg-slate-200', { 'bg-slate-200': pathname === '/ppt' })
-  const noteClassNames = classnames('p-4 h-full hover:bg-slate-200', { 'bg-slate-200': pathname === '/note' })
-  const demoClassNames = classnames('p-4 h-full hover:bg-slate-200', { 'bg-slate-200': pathname === '/demo' })
+  const linkCommonClass = 'p-6 h-full hover:bg-slate-200'
+  const pptClassNames = classnames(linkCommonClass, { 'bg-slate-200': pathname === '/ppt' })
+  const noteClassNames = classnames(linkCommonClass, { 'bg-slate-200': pathname === '/note' })
+  const demoClassNames = classnames(linkCommonClass, { 'bg-slate-200': pathname === '/demo' })
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-screen">
       <div className="flex items-center bg-slate-50">
         <Link href="" className="focus:shadow-none">
           <div className="flex justify-center w-40"></div>
