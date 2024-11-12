@@ -65,7 +65,6 @@ const CreateDialog = function ({createNoteBook}) {
     e.preventDefault()
     const { error } = await createNoteBook(name)
     if (!error) setOpen(false)
-    console.log(error)
   }
 
   return (
