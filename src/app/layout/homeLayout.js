@@ -8,9 +8,9 @@ export default function HomeLayout({ children }) {
   const pathname = usePathname()
  
   const linkCommonClass = 'p-6 h-full hover:bg-slate-200'
-  const pptClassNames = classnames(linkCommonClass, { 'bg-slate-200': pathname === '/ppt' })
-  const noteClassNames = classnames(linkCommonClass, { 'bg-slate-200': pathname === '/note' })
-  const demoClassNames = classnames(linkCommonClass, { 'bg-slate-200': pathname === '/demo' })
+  const pptClassNames = classnames(linkCommonClass, { 'bg-slate-200': pathname.indexOf('/ppt') === 0 })
+  const noteClassNames = classnames(linkCommonClass, { 'bg-slate-200': pathname.indexOf('/note') === 0 })
+  const demoClassNames = classnames(linkCommonClass, { 'bg-slate-200': pathname.indexOf('/demo') === 0 })
 
   return (
     <div className="flex flex-col h-screen">
