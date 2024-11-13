@@ -16,7 +16,7 @@ export default function HomeLayout({ children }) {
     <div className="flex flex-col h-screen">
       <div className="flex items-center bg-slate-50">
         <Link href="" className="focus:shadow-none">
-          <div className="flex justify-center w-40"></div>
+          <div className="flex justify-center w-40 text-xl">FrontPress</div>
         </Link>
         <Link href="/ppt" className={pptClassNames}>演示</Link>
         <Link href="/note" className={noteClassNames}>笔记</Link>
