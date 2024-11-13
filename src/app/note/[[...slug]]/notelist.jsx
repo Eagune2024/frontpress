@@ -17,7 +17,7 @@ export default function NoteList ({ currentBookId, currentNoteId, notelist }) {
           {
             notelist.map((note, index) => (
               <Link key={note.id} href={`/note/${currentBookId}/${note.id}`}>
-                <Button variant={ `${note.id}` === currentNoteId ? '': 'ghost' } className="h-8 justify-start w-full">
+                <Button variant={ `${note.id}` === currentNoteId ? '': 'ghost' } className="text-lg h-12 justify-start w-full">
                   <FileIcon className="mr-2 h-6 w-6"/>
                   { note.name }
                 </Button>

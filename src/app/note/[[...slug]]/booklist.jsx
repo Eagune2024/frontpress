@@ -17,7 +17,7 @@ export default function BookList ({ currentBookId, booklist }) {
           {
             booklist.map((book) => (
               <Link key={book.id} href={`/note/${book.id}`}>
-                <Button variant={ `${book.id}` === currentBookId ? '' : 'ghost'} className="h-8 w-full" >
+                <Button variant={ `${book.id}` === currentBookId ? '' : 'ghost'} className="text-lg h-12 w-full" >
                   <FileTextIcon className="mr-1 h-4 w-4" />
                   { book.name }
                   <span className="ml-auto dark:text-white">{ book.note }</span>

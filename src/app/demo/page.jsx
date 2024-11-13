@@ -49,12 +49,12 @@ const ProjectCard = function ({ project, deleteProject }) {
         {project.created_at}
       </CardContent>
       <CardFooter className="flex">
-        <Link to={`/project/${project.id}`} className="flex flex-1 focus:shadow-none" target="_blank">
+        <Link href={`/project/${project.id}`} className="flex flex-1 focus:shadow-none" target="_blank">
           <Button variant="ghost" size="icon" className="flex-1">
             <OpenInNewWindowIcon />
           </Button>
         </Link>
-        <Link to={`/editor?projectId=${project.id}`} className="flex flex-1 focus:shadow-none" target="_blank">
+        <Link href={`/editor?projectId=${project.id}`} className="flex flex-1 focus:shadow-none" target="_blank">
           <Button variant="ghost" size="icon" className="flex-1">
             <Pencil2Icon />
           </Button>
