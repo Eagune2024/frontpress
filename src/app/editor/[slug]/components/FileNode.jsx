@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import classNames from 'classnames';
 import { FilesContext } from './IDE';
 import { Button } from "@/ui/button"
-// import JsIcon from '../../../assets/editor/js.svg';
-// import CssIcon from '../../../assets/editor/css.svg';
-// import HtmlIcon from '../../../assets/editor/html.svg';
+import JsIcon from '../assets/js.svg';
+import CssIcon from '../assets/css.svg';
+import HtmlIcon from '../assets/html.svg';
 
 export default function FileNode ({files, id}) {
   const { filesValue, setFileValue } = useContext(FilesContext);
@@ -45,9 +45,9 @@ export default function FileNode ({files, id}) {
         <div className="file-item__content">
           <span className="file-item__spacer"></span>
           <Button variant={ isCurrent ? 'secondary' : 'ghost' } className="w-full justify-start" onClick={handleFileClick}>
-            {/* { file.fileContentType === 'html' && <HtmlIcon className="w-4 h-4 fill-amber-600 mr-2" />}
-            { file.fileContentType === 'css' && <CssIcon className="w-4 h-4 fill-cyan-600 mr-2" />}
-            { file.fileContentType === 'javascript' && <JsIcon className="w-4 h-4 fill-yellow-300 mr-2" />} */}
+            { file.fileContentType === 'html' && <HtmlIcon src="/editor/html.svg" className="w-4 h-4 fill-amber-600 mr-2" />}
+            { file.fileContentType === 'css' && <CssIcon src="/editor/css.svg" className="w-4 h-4 fill-cyan-600 mr-2" />}
+            { file.fileContentType === 'javascript' && <JsIcon className="w-4 h-4 fill-yellow-300 mr-2" />}
             { file.name }
           </Button>
         </div>
