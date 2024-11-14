@@ -67,7 +67,7 @@ export default React.forwardRef(function Editor(props, ref) {
       currentFileMode = getFileMode(curFile.name)
       editorRef.current?.dispatch({ changes: { from: 0, to: currentDocLen, insert: curFile.content } })
     }
-  }, [filesValue])
+  }, [filesValue, editorRef.current])
 
   useEffect(() => {
     editorRef.current = new EditorView({

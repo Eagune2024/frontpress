@@ -54,7 +54,7 @@ const ProjectCard = function ({ project, deleteProject }) {
             <OpenInNewWindowIcon />
           </Button>
         </Link>
-        <Link href={`/editor?projectId=${project.id}`} className="flex flex-1 focus:shadow-none" target="_blank">
+        <Link href={`/editor/${project.id}`} className="flex flex-1 focus:shadow-none" target="_blank">
           <Button variant="ghost" size="icon" className="flex-1">
             <Pencil2Icon />
           </Button>

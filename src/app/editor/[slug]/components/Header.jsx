@@ -1,3 +1,6 @@
+import { useContext } from 'react';
+import { FilesContext } from './IDE';
+import { MessageTypes, dispatchMessage } from '@/utils/Message';
 import {
   Menubar,
   MenubarContent,
@@ -9,6 +12,26 @@ import {
 import Link from "next/link";
 
 export default function Header({ syncFileContent, saveProject }) {
+  const { filesValue } = useContext(FilesContext);
+
+  const startSketch = (files) => {
+    dispatchMessage({
+      type: MessageTypes.SKETCH,
+      payload: {
+        files,
+        basePath: window.location.pathname,
+      }
+    });
+    dispatchMessage({
+      type: MessageTypes.START
+    });
+  }
+  
+  const startProject = () => {
+    syncFileContent();
+    startSketch(filesValue.files);
+  }
+
   return (
     <>
       <Menubar className="px-4 h-12 shadow-none">
@@ -34,7 +57,7 @@ export default function Header({ syncFileContent, saveProject }) {
         <MenubarMenu>
           <MenubarTrigger className="focus:shadow-none">运行</MenubarTrigger>
           <MenubarContent>
-            <MenubarItem>
+            <MenubarItem onClick={startProject}>
               开始运行
             </MenubarItem>
             <MenubarItem>
