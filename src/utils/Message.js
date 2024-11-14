@@ -45,4 +45,8 @@ function eventListener(e) {
     if (listener) listener(data);
   }
 }
-window.addEventListener('message', eventListener);
+
+const isBrowser = () => typeof window !== 'undefined';
+if (isBrowser()) {
+  window.addEventListener('message', eventListener);
+}

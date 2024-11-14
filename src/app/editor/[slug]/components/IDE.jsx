@@ -9,10 +9,11 @@ import {
 } from "@/ui/resizable"
 import SideBar from './Sidebar';
 import Editor from './Editor';
+import PreviewFrame from './PreviewFrame';
 
 export const FilesContext = React.createContext();
 
-export default function IDE({project}) {
+export default function IDE({ project, origin }) {
   const indexHtmlFile = project.files.filter((file) => file.name === 'index.html')[0]
 
   const [filesValue, setFileValue] = useState({
@@ -47,6 +48,7 @@ export default function IDE({project}) {
               <h2>预览</h2>
             </header>
             <div className='w-full relative flex-1'>
+              <PreviewFrame origin={origin} />
             </div>
           </section>
         </ResizablePanel>

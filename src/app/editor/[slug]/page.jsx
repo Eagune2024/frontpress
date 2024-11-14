@@ -14,7 +14,7 @@ export default async function EditorView ({ params }) {
 
   return (
     <div className='w-screen h-screen flex flex-col rounded-xl border border-black overflow-hidden'>
-      <IDE project={project} />
+      <IDE project={project} origin={process.env.PREVIEW_URL} />
     </div>
   )
 }
