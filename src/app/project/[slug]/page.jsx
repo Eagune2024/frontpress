@@ -14,7 +14,7 @@ export default async function EditorView ({ params }) {
 
   return (
     <div className='w-screen h-screen overflow-hidden'>
-      <Preview project={project} origin={process.env.PREVIEW_URL} />
+      <Preview project={project} origin={process.env.NEXT_PUBLIC_PREVIEW_URL} />
     </div>
   )
 }

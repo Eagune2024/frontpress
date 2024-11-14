@@ -4,7 +4,7 @@ import { registerFrame } from '@/utils/Message';
 export default function PreviewFrame({ origin }) {
   const iframe = useRef();
   useEffect(() => {
-    const unsubscribe = registerFrame(iframe.current.contentWindow, origin);
+    const unsubscribe = registerFrame(iframe.current.contentWindow, origin || window.origin);
     return () => {
       unsubscribe();
     };

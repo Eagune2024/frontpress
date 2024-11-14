@@ -4,33 +4,36 @@ import React, { useEffect, useState } from 'react';
 import { registerFrame, MessageTypes, listen, dispatchMessage } from "@/utils/Message";
 import EmbedFrame from './components/EmbedFrame';
 import { Hook } from 'console-feed';
+import { isBrowser } from '@/utils/isBrowser';
 
-const editor = window.parent.parent;
-
-const consoleBuffer = [];
-const LOGWAIT = 500;
-Hook(window.console, (log) => {
-  consoleBuffer.push({
-    log
+if (isBrowser()) {
+  const editor = window.parent.parent;
+  const consoleBuffer = [];
+  const LOGWAIT = 500;
+  Hook(window.console, (log) => {
+    consoleBuffer.push({ log });
   });
-});
-setInterval(() => {
-  if (consoleBuffer.length > 0) {
-    const message = {
-      messages: consoleBuffer,
-      source: 'sketch'
-    };
-    editor.postMessage(message, process.env.PREVIEW_URL);
-    consoleBuffer.length = 0;
-  }
-}, LOGWAIT);
+  setInterval(() => {
+    if (consoleBuffer.length > 0) {
+      const message = {
+        messages: consoleBuffer,
+        source: 'sketch'
+      };
+      editor.postMessage(message, process.env.NEXT_PUBLIC_PREVIEW_URL || window.origin);
+      consoleBuffer.length = 0;
+    }
+  }, LOGWAIT);
+}
+
 
 export default function PreviewView () {
   const [files, setFiles] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [basePath, setBasePath] = useState('');
 
-  registerFrame(window.parent, process.env.PREVIEW_URL);
+  if (isBrowser()) {
+    registerFrame(window.parent, process.env.NEXT_PUBLIC_PREVIEW_URL || window.origin);
+  }
 
   function handleMessageEvent(message) {
     const { type, payload } = message;

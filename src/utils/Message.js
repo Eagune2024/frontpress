@@ -1,3 +1,5 @@
+import { isBrowser } from '@/utils/isBrowser';
+
 const frames = {};
 let frameIndex = 1;
 let listener = null;
@@ -46,7 +48,6 @@ function eventListener(e) {
   }
 }
 
-const isBrowser = () => typeof window !== 'undefined';
 if (isBrowser()) {
   window.addEventListener('message', eventListener);
 }
