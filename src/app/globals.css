@@ -70,3 +70,9 @@ html, body {
     @apply bg-background text-foreground;
   }
 }
+
+.cm-editor {
+  font-family: Inconsolata, monospace;
+  height: 100%;
+  font-size: 14px;
+}
