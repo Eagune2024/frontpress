@@ -1,5 +1,3 @@
-'use server'
-
 import HomeLayout from '@/app/layout/homeLayout'
 import supabasePromise from "@/utils/supabaseClient";
 import { redirect } from 'next/navigation';
