@@ -26,6 +26,7 @@
     "@radix-ui/react-menubar": "^1.1.2",
     "@radix-ui/react-scroll-area": "^1.2.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.46.1",
     "@svgr/webpack": "^8.1.0",
     "blob-util": "^2.0.2",
