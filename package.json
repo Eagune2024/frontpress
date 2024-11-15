@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -35,6 +35,8 @@
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
     "console-feed": "^3.6.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
     "lucide-react": "^0.456.0",
     "mime": "^4.0.4",
     "next": "15.0.3",

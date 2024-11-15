@@ -6,25 +6,26 @@ import NoteList from './notelist';
 import Note from './note';
 
 export async function generateStaticParams() {
-  const supabase = await supabasePromise
-  const { data: booklist, error } = await supabase.from('Notebook').select('name, id, created_at')
-  const noteResList = await Promise.all(booklist.map((book) => (supabase.from('Note').select('name, id, created_at').eq('notebook_id', book.id))))
-  return noteResList.reduce((params, { data: notelist }, index) => {
-    return params.concat([{ 'slug': [`${booklist[index].id}`] }]).concat(notelist.map((note) => ({ 'slug': [`${booklist[index].id}`, `${note.id}`] })))
+  const res = await fetch('http://localhost:3000/getNoteListSortbyBook')
+  const booklist = await res.json()
+  return booklist.reduce((params, book, index) => {
+    return params.concat([{ 'slug': [`${book.id}`] }]).concat(book.notelist.map((note) => ({ 'slug': [`${book.id}`, `${note.id}`] })))
   }, [{ 'slug': undefined }])
 }
 
 export default async function HomeNoteLayout ({ params }) {
   const supabase = await supabasePromise
   const { slug } = await params
-  const { data: booklist, errorNoteBook } = await supabase.from('Notebook').select('name, id, created_at')
+
+  const res = await fetch('http://localhost:3000/getNoteListSortbyBook')
+  const booklist = await res.json()
 
   if (!slug && booklist.length) {
     redirect(`/note/${booklist[0].id}`)
   }
 
   const [currentBookId, currentNoteId] = slug
-  const { data: notelist, errorNote } = await supabase.from('Note').select('name, id, created_at').eq('notebook_id', currentBookId)
+  const notelist = booklist.find((book) => book.id === currentBookId)?.notelist || []
 
   if (!currentNoteId && notelist.length) {
     redirect(`/note/${currentBookId}/${notelist[0].id}`)
