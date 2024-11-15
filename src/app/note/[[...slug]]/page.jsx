@@ -1,11 +1,14 @@
+'use server'
+
 import HomeLayout from '@/app/layout/homeLayout'
-import supabase from "@/utils/supabaseClient";
+import supabasePromise from "@/utils/supabaseClient";
 import { redirect } from 'next/navigation';
 import BookList from './booklist';
 import NoteList from './notelist';
 import Note from './note';
 
 export async function generateStaticParams() {
+  const supabase = await supabasePromise
   const { data: booklist, error } = await supabase.from('Notebook').select('name, id, created_at')
   const noteResList = await Promise.all(booklist.map((book) => (supabase.from('Note').select('name, id, created_at').eq('notebook_id', book.id))))
   return noteResList.reduce((params, { data: notelist }, index) => {
@@ -14,6 +17,7 @@ export async function generateStaticParams() {
 }
 
 export default async function HomeNoteLayout ({ params }) {
+  const supabase = await supabasePromise
   const { slug } = await params
   const { data: booklist, errorNoteBook } = await supabase.from('Notebook').select('name, id, created_at')
 
@@ -42,7 +46,6 @@ export default async function HomeNoteLayout ({ params }) {
         </div>
         <div className="flex-1">
           <Note note={note} />
-          
         </div>
       </div>
     </HomeLayout>
