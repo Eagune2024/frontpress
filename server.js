@@ -41,10 +41,15 @@ app.prepare().then(() => {
 
   server.post('/createNote', async (req, res) => {
     const { data: { user } } = await supabase.auth.getUser()
-    const result = await supabase.from('Note').insert([{
+    const result = await supabase.from('Note').insert({
       ...req.body,
       user_id: user.id
-    }])
+    })
+    res.json(result)
+  })
+
+  server.post('/editNote', async (req, res) => {
+    const result = await supabase.from('Note').update({ ...req.body }).eq('id', req.body.id)
     res.json(result)
   })
 

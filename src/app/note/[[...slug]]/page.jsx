@@ -44,7 +44,7 @@ export default async function HomeNoteLayout ({ params }) {
           <NoteList currentBookId={currentBookId} currentNoteId={currentNoteId} notelist={notelist} />
         </div>
         <div className="flex-1">
-          <Note note={note} />
+          <Note currentBookId={currentBookId} note={note} />
         </div>
       </div>
     </HomeLayout>
