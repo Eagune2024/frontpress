@@ -30,11 +30,22 @@ const handle = app.getRequestHandler()
 
 app.prepare().then(() => {
   const server = express();
+  server.use(express.json());
+  server.use(express.urlencoded({ extended: true }))
 
   server.get('/getNoteListSortbyBook', async (req, res) => {
     const { data: booklist, error } = await supabase.from('Notebook').select('name, id')
     const noteResList = await Promise.all(booklist.map((book) => (supabase.from('Note').select('name, id').eq('notebook_id', book.id))))
     res.json(booklist.map((book, index) => ({ ...book, notelist: noteResList[index].data })))
+  })
+
+  server.post('/createNote', async (req, res) => {
+    const { data: { user } } = await supabase.auth.getUser()
+    const result = await supabase.from('Note').insert([{
+      ...req.body,
+      user_id: user.id
+    }])
+    res.json(result)
   })
 
   server.get("*", (req, res) => {

@@ -25,7 +25,7 @@ export default async function HomeNoteLayout ({ params }) {
   }
 
   const [currentBookId, currentNoteId] = slug
-  const notelist = booklist.find((book) => book.id === currentBookId)?.notelist || []
+  const notelist = booklist.find((book) => `${book.id}` === currentBookId)?.notelist || []
 
   if (!currentNoteId && notelist.length) {
     redirect(`/note/${currentBookId}/${notelist[0].id}`)

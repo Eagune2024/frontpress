@@ -8,6 +8,7 @@ import Link from 'next/link';
 export default function BookList ({ currentBookId, booklist }) {
   return (
     <>
+      { process.env.NODE_ENV !== "production" && <div className="border-b border-solid border-black h-14 flex items-center pl-4">我的笔记本</div> }
       <ScrollArea className="flex-1 flex flex-col gap-4 py-2 w-72 border-r">
         <nav className="grid gap-1 px-2">
           {

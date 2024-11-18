@@ -35,7 +35,7 @@ export default async function DemoView ({ params }) {
       <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 gap-4 p-10">
         {
           projectlist.map((project, index) => (
-            <Card className="hover:border-black">
+            <Card className="hover:border-black" key={project.id}>
               <CardHeader>
                 <CardTitle>{project.name}</CardTitle>
                 <CardDescription>{project.name}</CardDescription>
