@@ -25,10 +25,8 @@ supabase.auth.signInWithPassword({
   email: process.env.NEXT_PUBLIC_SUPABASE_USER,
   password: process.env.NEXT_PUBLIC_SUPABASE_PASSWORD,
 })
-const app = next({ dev: process.env.NODE_ENV !== "production" });
-const handle = app.getRequestHandler()
 
-app.prepare().then(() => {
+const startNodeServer = (handle) => {
   const server = express();
   server.use(express.json());
   server.use(express.urlencoded({ extended: true }))
@@ -53,15 +51,47 @@ app.prepare().then(() => {
     res.json(result)
   })
 
-  server.get("*", (req, res) => {
-    return handle(req, res);
-  })
+  if (process.env.NODE_ENV !== "production") {
+    server.get("*", (req, res) => {
+      return handle(req, res);
+    })
+  }
 
   server.listen(3000, (err) => {
     if (err) throw err;
     console.log("> Ready on http://localhost:3000");
+
+    if (process.env.NODE_ENV === "production") {
+      const exec = require('child_process').exec;
+      console.log('开始构建');
+      console.log('======================');
+      const child_process = exec('rm -rf build && rm -rf .next && next build', (err, stdout, stderr) => {
+        if (err) {
+          console.log(err);
+        }
+        if (stderr) {
+          console.log('stderr: ' + stderr);
+        }
+      })
+      child_process.stdout.on('data', data => {
+        console.log(data)
+      })
+      child_process.on('exit', (code, signal) => {
+        console.log('======================');
+        console.log('构建完成');
+        process.exit(1);
+      })
+    }
   })
-}).catch((ex) => {
-  console.error(ex.stack)
-  process.exit(1)
-})
+}
+
+if (process.env.NODE_ENV !== "production") {
+  const app = next({ dev: true });
+  const handle = app.getRequestHandler()
+  app.prepare().then(() => startNodeServer(handle)).catch((ex) => {
+    console.error(ex.stack)
+    process.exit(1)
+  })
+} else {
+  startNodeServer()
+}
