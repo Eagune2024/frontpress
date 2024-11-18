@@ -46,15 +46,23 @@ export default function Note ({ currentBookId, note }) {
 
   MDXEditor embeds CodeMirror for code editing.
 
-
-  ## A live code example
-
-  The block below is a live React component. You can configure multiple live code presets that specify the available npm packages and the default imports. You can also specify a default component that will be rendered in the live code block.
+  \`\`\` js
+  export default function App() {
+    return (<div>Hello world</div>)
+  }
+  \`\`\`
 
   ## A table
 
   Play with the table below - add rows, columns, change column alignment. When editing,
   you can navigate the cells with \`enter\`, \`shift+enter\`, \`tab\` and \`shift+tab\`.
+
+  | Item              | In Stock | Price |
+  | :---------------- | :------: | ----: |
+  | Python Hat        |   True   | 23.99 |
+  | SQL Hat           |   True   | 23.99 |
+  | Codecademy Tee    |   False  | 19.99 |
+  | Codecademy Hoodie |   False  | 42.99 |
 `
 
 

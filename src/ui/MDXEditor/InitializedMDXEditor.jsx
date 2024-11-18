@@ -6,6 +6,9 @@ import {
   quotePlugin,
   thematicBreakPlugin,
   markdownShortcutPlugin,
+  tablePlugin,
+  codeBlockPlugin,
+  codeMirrorPlugin,
   MDXEditor,
   toolbarPlugin,
   UndoRedo,
@@ -21,10 +24,12 @@ export default function InitializedMDXEditor({ editorRef, ...props }) {
         headingsPlugin(),
         listsPlugin(),
         quotePlugin(),
+        tablePlugin(),
+        codeBlockPlugin({defaultCodeBlockLanguage: 'js'}),
+        codeMirrorPlugin({ codeBlockLanguages: { js: 'JavaScript', css: 'CSS' } }),
         thematicBreakPlugin(),
         markdownShortcutPlugin(),
         toolbarPlugin({
-          toolbarClassName: 'my-classname',
           toolbarContents: () => (
             <>
               {' '}
