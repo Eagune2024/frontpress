@@ -12,11 +12,11 @@ import {
   BoldItalicUnderlineToggles,
 } from '@mdxeditor/editor'
 import '@mdxeditor/editor/style.css'
+import './index.css'
 
 export default function InitializedMDXEditor({ editorRef, ...props }) {
   return (
     <MDXEditor
-      className='dark-theme dark-editor'
       plugins={[
         headingsPlugin(),
         listsPlugin(),
