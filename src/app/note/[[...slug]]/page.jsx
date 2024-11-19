@@ -1,5 +1,4 @@
 import HomeLayout from '@/app/layout/homeLayout'
-import supabasePromise from "@/utils/supabaseClient";
 import { redirect } from 'next/navigation';
 import BookList from './booklist';
 import NoteList from './notelist';
@@ -14,7 +13,6 @@ export async function generateStaticParams() {
 }
 
 export default async function HomeNoteLayout ({ params }) {
-  const supabase = await supabasePromise
   const { slug } = await params
 
   const res = await fetch('http://localhost:3000/getNoteListSortbyBook')
@@ -31,8 +29,8 @@ export default async function HomeNoteLayout ({ params }) {
     redirect(`/note/${currentBookId}/${notelist[0].id}`)
   }
 
-  const { data } = await supabase.from('Note').select('name, id, content, created_at').eq('id', currentNoteId).maybeSingle()
-  const note = data || {}
+  const resNote = await fetch('http://localhost:3000/getNote/' + currentNoteId)
+  const note = await resNote.json()
 
   return (
     <HomeLayout>
