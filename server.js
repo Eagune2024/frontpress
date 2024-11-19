@@ -44,8 +44,8 @@ const startNodeServer = (handle) => {
 
   server.get('/getNoteListSortbyBook', async (req, res) => {
     const { data: booklist, error } = await supabase.from('Notebook').select('name, id')
-    const noteResList = await Promise.all(booklist.map((book) => (supabase.from('Note').select('name, id').eq('notebook_id', book.id) .order('id', { ascending: true }))))
-    res.json(booklist.map((book, index) => ({ ...book, notelist: noteResList[index].data })))
+    const noteResList = await Promise.all((booklist || []).map((book) => (supabase.from('Note').select('name, id').eq('notebook_id', book.id) .order('id', { ascending: true }))))
+    res.json((booklist || []).map((book, index) => ({ ...book, notelist: noteResList[index].data })))
   })
 
   server.get('/getNote/:id', async (req, res) => {

@@ -18,14 +18,14 @@ export default async function HomeNoteLayout ({ params }) {
   const res = await fetch('http://localhost:3000/getNoteListSortbyBook')
   const booklist = await res.json()
 
-  if (!slug && booklist.length) {
+  if (!slug && booklist.length && process.env.NODE_ENV === "production") {
     redirect(`/note/${booklist[0].id}`)
   }
 
   const [currentBookId, currentNoteId] = slug || []
   const notelist = booklist.find((book) => `${book.id}` === currentBookId)?.notelist || []
 
-  if (!currentNoteId && notelist.length) {
+  if (!currentNoteId && notelist.length && process.env.NODE_ENV === "production") {
     redirect(`/note/${currentBookId}/${notelist[0].id}`)
   }
 
