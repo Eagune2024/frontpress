@@ -4,6 +4,7 @@ import { ScrollArea } from "@/ui/scroll-area"
 import { Button } from "@/ui/button"
 import { FileTextIcon } from "@radix-ui/react-icons"
 import Link from 'next/link';
+import CreateBookDialog from './CreateBookDialog'
 
 export default function BookList ({ currentBookId, booklist }) {
   return (
@@ -24,6 +25,7 @@ export default function BookList ({ currentBookId, booklist }) {
           }
         </nav>
       </ScrollArea>
+      <CreateBookDialog />
     </>
   )
 }

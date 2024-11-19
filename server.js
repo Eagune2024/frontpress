@@ -31,6 +31,12 @@ const startNodeServer = (handle) => {
   server.use(express.json());
   server.use(express.urlencoded({ extended: true }))
 
+  server.post('/createBook', async (req, res) => {
+    const { data: { user } } = await supabase.auth.getUser()
+    const result = await supabase.from('Notebook').insert({ ...req.body, user_id: user.id })
+    res.json(result)
+  })
+
   server.get('/getNoteListSortbyBook', async (req, res) => {
     const { data: booklist, error } = await supabase.from('Notebook').select('name, id')
     const noteResList = await Promise.all(booklist.map((book) => (supabase.from('Note').select('name, id').eq('notebook_id', book.id) .order('id', { ascending: true }))))
