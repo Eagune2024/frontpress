@@ -42,7 +42,7 @@ export default async function HomeNoteLayout ({ params }) {
           <NoteList currentBookId={currentBookId} currentNoteId={currentNoteId} notelist={notelist} />
         </div>
         <div className="flex-1 flex flex-col">
-          <Note currentBookId={currentBookId} note={note} />
+          { note && <Note currentBookId={currentBookId} note={note} /> }
         </div>
       </div>
     </HomeLayout>
