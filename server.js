@@ -58,8 +58,18 @@ const startNodeServer = (handle) => {
     res.json(count)
   })
 
+  server.get('/getProjectList', async (req, res) => {
+    const { data } = await supabase.from('Project').select('id')
+    res.json(data)
+  })
+
   server.get('/getProjectList/:page', async (req, res) => {
     const { data } = await supabase.from('Project').select('id, name, created_at').range((req.params.page - 1) * 10, req.params.page * 10)
+    res.json(data)
+  })
+
+  server.get('/getProject/:id', async (req, res) => {
+    const { data } = await supabase.from('Project').select('name, id, files, created_at').eq('id', req.params.id).maybeSingle()
     res.json(data)
   })
 

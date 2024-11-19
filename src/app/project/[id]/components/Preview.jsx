@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import PreviewFrame from '@/app/editor/[slug]/components/PreviewFrame';
+import PreviewFrame from '@/app/editor/[id]/components/PreviewFrame';
 import useInterval from '@/utils/useInterval';
 import { listen } from '@/utils/Message';
 import { MessageTypes, dispatchMessage } from '@/utils/Message';
