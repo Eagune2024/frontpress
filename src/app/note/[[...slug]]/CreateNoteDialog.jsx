@@ -40,7 +40,7 @@ export default function CreateNoteDialog ({ currentBookId, currentNoteId }) {
     const { error } = await res.json()
     if (!error) {
       setOpen(false)
-      redirect(`/note/${currentBookId}/${currentNoteId}`)
+      redirect(`/note/${currentBookId}`)
     }
   }
 

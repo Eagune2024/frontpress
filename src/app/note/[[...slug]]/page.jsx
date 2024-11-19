@@ -22,7 +22,7 @@ export default async function HomeNoteLayout ({ params }) {
     redirect(`/note/${booklist[0].id}`)
   }
 
-  const [currentBookId, currentNoteId] = slug
+  const [currentBookId, currentNoteId] = slug || []
   const notelist = booklist.find((book) => `${book.id}` === currentBookId)?.notelist || []
 
   if (!currentNoteId && notelist.length) {
@@ -38,9 +38,12 @@ export default async function HomeNoteLayout ({ params }) {
         <div className="h-full flex flex-col border-r border-black w-72 overflow-hidden">
           <BookList currentBookId={currentBookId} booklist={booklist} />
         </div>
-        <div className="h-full flex flex-col border-r border-black w-80">
-          <NoteList currentBookId={currentBookId} currentNoteId={currentNoteId} notelist={notelist} />
-        </div>
+        {
+          currentBookId &&
+          <div className="h-full flex flex-col border-r border-black w-80">
+            <NoteList currentBookId={currentBookId} currentNoteId={currentNoteId} notelist={notelist} />
+          </div>
+        }
         <div className="flex-1 flex flex-col">
           { note && <Note currentBookId={currentBookId} note={note} /> }
         </div>

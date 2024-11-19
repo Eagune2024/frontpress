@@ -29,7 +29,7 @@ export default function Note ({ currentBookId, note }) {
         { process.env.NODE_ENV !== "production" && <DeleteNoteAlertDialog currentBookId={currentBookId} note={note} /> }
       </div>
       <div className="flex-1 overflow-auto">
-        <MDXEditor markdown={note.content} onChange={save} />
+        <MDXEditor markdown={note.content} onChange={save} readOnly={process.env.NODE_ENV === "production"} />
       </div>
     </>
   )
