@@ -52,6 +52,11 @@ const startNodeServer = (handle) => {
     const result = await supabase.from('Note').update({ ...req.body }).eq('id', req.body.id)
     res.json(result)
   })
+
+  server.delete('/deleteNote/:id', async (req, res) => {
+    const result = await supabase.from('Note').delete().eq('id', req.params.id)
+    res.json(result)
+  })
   
   server.get('/getProjectCount', async (req, res) => {
     const { count } = await supabase.from('Project').select('*', { count: 'exact', head: true })

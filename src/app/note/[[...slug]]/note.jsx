@@ -3,6 +3,7 @@
 import EditNoteTitleDialog from "./EditNoteTitleDialog"
 import MDXEditor from '@/ui/MDXEditor'
 import useDebounce from '@/utils/useDebounce'
+import DeleteAlertDialog from './DeleteAlertDialog'
 
 export default function Note ({ currentBookId, note }) {
   const saveContent = async (content) => {
@@ -23,8 +24,9 @@ export default function Note ({ currentBookId, note }) {
   return (
     <>
       <div className="border-b border-solid border-black h-14 flex items-center pl-4">
-        { note.name }
+        <span className="mr-2">{ note.name }</span>
         <EditNoteTitleDialog currentBookId={currentBookId} note={note} />
+        <DeleteAlertDialog currentBookId={currentBookId} note={note} />
       </div>
       <div className="flex-1 overflow-auto">
         <MDXEditor markdown={note.content} onChange={save} />
