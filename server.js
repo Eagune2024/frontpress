@@ -37,6 +37,11 @@ const startNodeServer = (handle) => {
     res.json(result)
   })
 
+  server.delete('/deleteBook/:id', async (req, res) => {
+    const result = await supabase.from('Notebook').delete().eq('id', req.params.id)
+    res.json(result)
+  })
+
   server.get('/getNoteListSortbyBook', async (req, res) => {
     const { data: booklist, error } = await supabase.from('Notebook').select('name, id')
     const noteResList = await Promise.all(booklist.map((book) => (supabase.from('Note').select('name, id').eq('notebook_id', book.id) .order('id', { ascending: true }))))

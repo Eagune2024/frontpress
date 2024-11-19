@@ -5,11 +5,18 @@ import { Button } from "@/ui/button"
 import { FileIcon } from "@radix-ui/react-icons"
 import Link from 'next/link';
 import CreateNoteDialog from "./CreateNoteDialog";
+import DeleteBookAlertDialog from './DeleteBookAlertDialog';
 
 export default function NoteList ({ currentBookId, currentNoteId, notelist }) {
   return (
     <>
-      { process.env.NODE_ENV !== "production" && <div className="border-b border-solid border-black h-14"><CreateNoteDialog currentBookId={currentBookId} currentNoteId={currentNoteId} /></div> }
+      {
+        process.env.NODE_ENV !== "production" && 
+        <div className="border-b border-solid border-black h-14">
+          <CreateNoteDialog currentBookId={currentBookId} currentNoteId={currentNoteId} />
+          <DeleteBookAlertDialog currentBookId={currentBookId}/>
+        </div>
+      }
       <ScrollArea className="flex-1 flex flex-col gap-4 py-2">
         <nav className="grid gap-1 px-2">
           {
