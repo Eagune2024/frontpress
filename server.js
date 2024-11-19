@@ -33,22 +33,34 @@ const startNodeServer = (handle) => {
 
   server.get('/getNoteListSortbyBook', async (req, res) => {
     const { data: booklist, error } = await supabase.from('Notebook').select('name, id')
-    const noteResList = await Promise.all(booklist.map((book) => (supabase.from('Note').select('name, id').eq('notebook_id', book.id))))
+    const noteResList = await Promise.all(booklist.map((book) => (supabase.from('Note').select('name, id').eq('notebook_id', book.id) .order('id', { ascending: true }))))
     res.json(booklist.map((book, index) => ({ ...book, notelist: noteResList[index].data })))
+  })
+
+  server.get('/getNote/:id', async (req, res) => {
+    const { data } = await supabase.from('Note').select().eq('id', req.params.id).maybeSingle()
+    res.json(data)
   })
 
   server.post('/createNote', async (req, res) => {
     const { data: { user } } = await supabase.auth.getUser()
-    const result = await supabase.from('Note').insert({
-      ...req.body,
-      user_id: user.id
-    })
+    const result = await supabase.from('Note').insert({ ...req.body, user_id: user.id })
     res.json(result)
   })
 
   server.post('/editNote', async (req, res) => {
     const result = await supabase.from('Note').update({ ...req.body }).eq('id', req.body.id)
     res.json(result)
+  })
+  
+  server.get('/getProjectCount', async (req, res) => {
+    const { count } = await supabase.from('Project').select('*', { count: 'exact', head: true })
+    res.json(count)
+  })
+
+  server.get('/getProjectList/:page', async (req, res) => {
+    const { data } = await supabase.from('Project').select('id, name, created_at').range((req.params.page - 1) * 10, req.params.page * 10)
+    res.json(data)
   })
 
   if (process.env.NODE_ENV !== "production") {
