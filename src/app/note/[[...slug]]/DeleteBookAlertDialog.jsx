@@ -14,7 +14,7 @@ import { Button } from "@/ui/button"
 import { TrashIcon } from "@radix-ui/react-icons"
 import { redirect } from 'next/navigation'
 
-export default function DeleteAlertDialog ({ currentBookId }) {
+export default function DeleteBookAlertDialog ({ currentBookId }) {
   const [open, setOpen] = useState(false)
 
   const deleteBook = async () => {
