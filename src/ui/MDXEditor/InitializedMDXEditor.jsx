@@ -9,6 +9,7 @@ import {
   tablePlugin,
   codeBlockPlugin,
   codeMirrorPlugin,
+  jsxPlugin,
   MDXEditor,
   toolbarPlugin,
   UndoRedo,
@@ -20,6 +21,7 @@ import {
 } from '@mdxeditor/editor'
 import '@mdxeditor/editor/style.css'
 import './index.css'
+import InsertDemoButton, { InsertDemoDirectiveDescriptor } from './insertDemo'
 
 export default function InitializedMDXEditor({ editorRef, ...props }) {
   return (
@@ -33,6 +35,9 @@ export default function InitializedMDXEditor({ editorRef, ...props }) {
         codeMirrorPlugin({ codeBlockLanguages: { js: 'JavaScript', css: 'CSS' } }),
         thematicBreakPlugin(),
         markdownShortcutPlugin(),
+        jsxPlugin({
+          jsxComponentDescriptors: [InsertDemoDirectiveDescriptor]
+        }),
         toolbarPlugin({
           toolbarContents: () => (
             <>
@@ -44,6 +49,7 @@ export default function InitializedMDXEditor({ editorRef, ...props }) {
               <CodeToggle />
               <InsertTable />
               <Separator />
+              <InsertDemoButton />
             </>
           )
         })

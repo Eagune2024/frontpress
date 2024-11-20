@@ -7,7 +7,7 @@
   margin: revert;
 }
 
-.mdxeditor ol, ul, menu {
+.mdxeditor ol, ul:not(.file-item__children), menu {
   list-style: revert;
   margin: revert;
   padding: revert;
