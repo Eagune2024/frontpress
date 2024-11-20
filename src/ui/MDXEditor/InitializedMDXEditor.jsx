@@ -13,6 +13,10 @@ import {
   toolbarPlugin,
   UndoRedo,
   BoldItalicUnderlineToggles,
+  CodeToggle,
+  BlockTypeSelect,
+  InsertTable,
+  Separator,
 } from '@mdxeditor/editor'
 import '@mdxeditor/editor/style.css'
 import './index.css'
@@ -34,7 +38,12 @@ export default function InitializedMDXEditor({ editorRef, ...props }) {
             <>
               {' '}
               <UndoRedo />
+              <Separator />
+              <BlockTypeSelect />
               <BoldItalicUnderlineToggles />
+              <CodeToggle />
+              <InsertTable />
+              <Separator />
             </>
           )
         })
