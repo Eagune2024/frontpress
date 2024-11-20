@@ -10,6 +10,7 @@ export const InsertDemoDirectiveDescriptor = {
     hasChildren: false,
     Editor: ({ mdastNode: { attributes } }) => {
       const projectJSON = attributes.find((attr) => (attr.name === 'projectJSON'))?.value
+      if (!projectJSON) return (<></>)
       const project = JSON.parse(projectJSON)
       return (<IDE project={project} origin={process.env.NEXT_PUBLIC_PREVIEW_URL} />)
     }
